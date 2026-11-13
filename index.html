@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Italian Prepositions</title>
+  <link rel="stylesheet" href="style.css?v=47543463">
+</head>
+<body>
+  <div class="page">
+  <main class="card">
+    <h1>Preposizioni</h1>
+
+    <!-- Start screen -->
+    <section id="screen-start">
+      <p class="lead">Translate each English phrase into Italian: verb + preposition + noun. Write the exact phrase, including the article.</p>
+      <div class="notes">
+        <h2>How to answer</h2>
+        <ul>
+          <li>Write the whole phrase: <em>verb + preposition + noun</em>, exactly as Italian has it. Include the article when Italian uses one (<em>al cinema</em>, <em>con un amico</em>) and leave it out when it doesn't (<em>a scuola</em>, <em>a casa</em>).</li>
+          <li><strong>Infinitive</strong> phrases ("To go…") need the infinitive: <em>andare al cinema</em>.</li>
+          <li><strong>Present tense</strong> phrases ("She goes…") need the verb conjugated for that subject: <em>va al cinema</em>.</li>
+          <li>The subject pronoun is not required (<em>io, tu, lui/lei, noi, voi, loro</em>), but it is accepted if you add it.</li>
+          <li>Subjects: I = io, you = tu, he / she = third person singular (lui / lei, same verb form), we = noi, y'all = voi, they = loro.</li>
+          <li>Stuck on a noun? Click the underlined English noun in the phrase to see it in Italian (without the article).</li>
+          <li>After each answer you can mark the phrase <strong>Learned</strong> (never shown again) or postpone it to be repeated in 1, 3 or 5 days. Hotkeys after an answer: <kbd>E</kbd> learned, <kbd>1</kbd> / <kbd>2</kbd> / <kbd>3</kbd> repeat in 1 / 3 / 5 days, <kbd>Enter</kbd> next phrase. Your progress is saved in this browser.</li>
+          <li>Accents count (<em>dà</em> ≠ <em>da</em>); use the buttons under the field. Capital letters and extra spaces don't matter.</li>
+        </ul>
+      </div>
+
+      <p class="today">Today's points: <strong id="today-points">0</strong></p>
+      <p id="overview" class="overview"></p>
+
+      <form id="start-form">
+        <fieldset class="field">
+          <legend>Study</legend>
+          <label class="radio"><input type="radio" name="set" value="all" checked> All non-learned phrases <span class="n" id="n-all"></span></label>
+          <label class="radio"><input type="radio" name="set" value="postponed"> Only postponed phrases <span class="n" id="n-postponed"></span></label>
+          <label class="radio"><input type="radio" name="set" value="due"> Only phrases due for a repeat <span class="n" id="n-due"></span></label>
+        </fieldset>
+
+        <label class="field">
+          <span>Number of phrases</span>
+          <input id="count" type="number" min="1" max="50" value="7" inputmode="numeric">
+        </label>
+
+        <fieldset class="field">
+          <legend>Verb form</legend>
+          <label class="radio"><input type="radio" name="mode" value="mixed" checked> Mixed</label>
+          <label class="radio"><input type="radio" name="mode" value="infinitive"> Infinitive only</label>
+          <label class="radio"><input type="radio" name="mode" value="present"> Present tense only</label>
+        </fieldset>
+
+        <div class="buttons">
+          <button id="start" type="submit" class="primary">Start</button>
+          <button id="show-list" type="button" class="secondary">See all phrases</button>
+          <button id="reset" type="button" class="secondary">Reset progress</button>
+        </div>
+        <p id="start-note" class="hint" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <!-- Quiz screen -->
+    <section id="screen-quiz" hidden>
+      <div class="meta">
+        <span id="progress">1 / 7</span>
+        <span class="meta-right">
+          <span id="tag" class="tag">Infinitive</span>
+          <button id="stop" type="button" class="secondary small">Stop</button>
+        </span>
+      </div>
+      <p id="phrase" class="phrase"></p>
+      <p id="hint" class="hint"></p>
+
+      <form id="answer-form" autocomplete="off">
+        <label class="sr-only" for="answer">Your Italian answer</label>
+        <input id="answer" type="text" lang="it" autocomplete="off" autocapitalize="off"
+               autocorrect="off" spellcheck="false" placeholder="Type the Italian phrase">
+        <div id="review" class="review" hidden>
+          <p id="marked" class="marked"></p>
+          <p id="correct-line" class="correct-line"></p>
+        </div>
+        <div class="accents" id="accents" role="group" aria-label="Accented letters">
+          <button type="button" class="accent">à</button>
+          <button type="button" class="accent">è</button>
+          <button type="button" class="accent">é</button>
+          <button type="button" class="accent">ì</button>
+          <button type="button" class="accent">í</button>
+          <button type="button" class="accent">ò</button>
+          <button type="button" class="accent">ó</button>
+          <button type="button" class="accent">ù</button>
+          <button type="button" class="accent">ú</button>
+        </div>
+        <div class="buttons">
+          <button id="check" type="submit" class="primary">Check</button>
+          <button id="next" type="button" class="primary" hidden>Next</button>
+        </div>
+      </form>
+      <p id="feedback" class="feedback" role="status" aria-live="polite"></p>
+      <p id="prep-note" class="prep-note" hidden></p>
+      <div id="notes" class="notes-box" hidden></div>
+
+      <div id="mark" class="mark" role="group" aria-label="What next for this phrase?" hidden>
+        <p id="mark-status" class="mark-status"></p>
+        <div class="mark-buttons">
+          <button type="button" class="secondary" data-action="learned">Learned <kbd>E</kbd></button>
+          <button type="button" class="secondary" data-action="postpone" data-days="1">Repeat in 1 day <kbd>1</kbd></button>
+          <button type="button" class="secondary" data-action="postpone" data-days="3">in 3 days <kbd>2</kbd></button>
+          <button type="button" class="secondary" data-action="postpone" data-days="5">in 5 days <kbd>3</kbd></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Full list of phrases -->
+    <section id="screen-list" hidden>
+      <div class="list-head">
+        <button id="list-back" type="button" class="secondary">← Back</button>
+        <span id="list-count" class="n" role="status" aria-live="polite"></span>
+      </div>
+      <div class="list-filters">
+        <label class="sr-only" for="list-filter">Show</label>
+        <select id="list-filter">
+          <option value="all">Non-learned</option>
+          <option value="postponed">Postponed</option>
+          <option value="due">Due for a repeat</option>
+          <option value="learned">Learned</option>
+          <option value="everything">Everything</option>
+        </select>
+        <label class="sr-only" for="list-search">Search</label>
+        <input id="list-search" type="search" placeholder="Search English or Italian" autocomplete="off" spellcheck="false">
+      </div>
+      <table class="list-table">
+        <thead><tr><th>English</th><th>Italian</th><th>Status</th></tr></thead>
+        <tbody id="list-body"></tbody>
+      </table>
+    </section>
+
+    <!-- Result screen -->
+    <section id="screen-result" hidden>
+      <p class="score" id="score">0%</p>
+      <p class="lead" id="score-detail"></p>
+      <p class="overview" id="score-overall"></p>
+      <div class="buttons">
+        <button id="restart" type="button" class="primary">Try again</button>
+        <button id="main-page" type="button" class="secondary">Main page</button>
+      </div>
+    </section>
+  </main>
+
+  <section class="panes" aria-label="Reference">
+    <details class="pane">
+      <summary>Simple prepositions and their meaning</summary>
+      <div class="pane-body">
+        <table>
+          <thead><tr><th>Preposition</th><th>Main meanings</th><th>Examples</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">a</th><td>to, at, in (cities); to a person; at a time</td><td><em>andare a Roma</em>, <em>a scuola</em>, <em>scrivere a un amico</em>, <em>alle otto</em></td></tr>
+            <tr><th scope="row">di</th><td>of, about; out of, from (leaving a place); origin</td><td><em>parlare di lavoro</em>, <em>uscire di casa</em></td></tr>
+            <tr><th scope="row">da</th><td>from; to/at someone's place; since, for (time)</td><td><em>venire da Napoli</em>, <em>andare dal medico</em></td></tr>
+            <tr><th scope="row">in</th><td>in, to (countries, buildings); by (means of transport)</td><td><em>vivere in Spagna</em>, <em>andare in banca</em>, <em>viaggiare in treno</em></td></tr>
+            <tr><th scope="row">su</th><td>on, onto; about</td><td><em>salire sul treno</em>, <em>sul quaderno</em></td></tr>
+            <tr><th scope="row">con</th><td>with</td><td><em>parlare con un amico</em>, <em>con la penna</em></td></tr>
+            <tr><th scope="row">per</th><td>for; towards (a destination); through; in order to</td><td><em>partire per Roma</em>, <em>studiare per l'esame</em></td></tr>
+            <tr><th scope="row">tra / fra</th><td>between, among; in (time from now)</td><td><em>fra due ore</em> (in two hours), <em>tra amici</em> (among friends)</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </details>
+
+    <details class="pane">
+      <summary>Articulated prepositions (preposition + article)</summary>
+      <div class="pane-body">
+        <p>When a, di, da, in or su meet a definite article, they merge into one word.</p>
+        <div class="table-wrap">
+          <table class="grid">
+            <thead>
+              <tr><th></th><th>il</th><th>lo</th><th>l'</th><th>la</th><th>i</th><th>gli</th><th>le</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">a</th><td>al</td><td>allo</td><td>all'</td><td>alla</td><td>ai</td><td>agli</td><td>alle</td></tr>
+              <tr><th scope="row">di</th><td>del</td><td>dello</td><td>dell'</td><td>della</td><td>dei</td><td>degli</td><td>delle</td></tr>
+              <tr><th scope="row">da</th><td>dal</td><td>dallo</td><td>dall'</td><td>dalla</td><td>dai</td><td>dagli</td><td>dalle</td></tr>
+              <tr><th scope="row">in</th><td>nel</td><td>nello</td><td>nell'</td><td>nella</td><td>nei</td><td>negli</td><td>nelle</td></tr>
+              <tr><th scope="row">su</th><td>sul</td><td>sullo</td><td>sull'</td><td>sulla</td><td>sui</td><td>sugli</td><td>sulle</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul>
+          <li><em>il</em> (plural <em>i</em>): masculine nouns starting with most consonants (<em>il cinema</em>, <em>i libri</em>).</li>
+          <li><em>lo</em> (plural <em>gli</em>): masculine nouns starting with s + consonant, z, gn or ps (<em>lo studio</em>, <em>gli studenti</em>). <em>gli</em> is also the plural before vowels (<em>gli amici</em>).</li>
+          <li><em>l'</em>: singular nouns starting with a vowel, masculine or feminine (<em>l'ufficio</em>, <em>l'università</em>).</li>
+          <li><em>la</em>, <em>le</em>: feminine nouns (<em>la scuola</em>, <em>le vacanze</em>).</li>
+          <li><em>con</em>, <em>per</em>, <em>tra/fra</em> normally stay separate: <em>con il professore</em>, <em>per la cena</em>.</li>
+          <li>Examples: <em>al cinema</em>, <em>dal medico</em>, <em>nel parco</em>, <em>sul treno</em>, <em>dell'ufficio</em>.</li>
+        </ul>
+      </div>
+    </details>
+  </section>
+  </div>
+
+  <script src="data.js?v=eddaae50"></script>
+  <script src="logic.js?v=56d0596d"></script>
+  <script src="progress.js?v=9080a164"></script>
+  <script src="app.js?v=495826ef"></script>
+</body>
+</html>
